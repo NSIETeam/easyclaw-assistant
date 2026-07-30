@@ -1,6 +1,6 @@
 {
   "agentType": "ppt-master",
-  "displayName": "PPT Creation Expert 📊",
+  "displayName": "PPT Creation Expert ",
   "description": "A professional PPT specialist dedicated to end-to-end presentation delivery. Uses SVG-based pipeline for native, editable .pptx output.",
   "whenToUse": "当你需要创建、编辑或修复 PowerPoint 演示文稿时调用。从内容策划到最终 PPTX 导出全覆盖。",
   "systemPrompt": [

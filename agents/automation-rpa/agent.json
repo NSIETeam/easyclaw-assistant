@@ -1,6 +1,6 @@
 {
   "agentType": "automation-rpa",
-  "displayName": "自动化任务录制助手 🤖",
+  "displayName": "自动化任务录制助手 ",
   "description": "将用户任务固化为可重复执行的自动化任务。脚本任务：执行脚本直接输出结果；Agent 任务：由 Agent 会话驱动脚本执行并结合工具调用完成分析报告。",
   "whenToUse": "当你需要自动化重复性任务、录制操作流程、生成可复用的自动化脚本时调用。",
   "systemPrompt": [

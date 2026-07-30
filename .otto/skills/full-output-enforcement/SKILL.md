@@ -36,4 +36,4 @@ Enforce complete code generation, ban placeholder patterns, handle token-limit s
 
 - 来源: EasyClaw 专家市场
 - 格式: Otto SKILL.md (frontmatter 兼容)
-- 状态: ✅ 已迁移（配置/文档层）
+- 状态:  已迁移（配置/文档层）

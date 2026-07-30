@@ -12,19 +12,19 @@
 easyclaw-assistant/
 ├── AGENTS.md                    # 本文件 — Otto 标准项目入口
 ├── agents/
-│   ├── kings-coder/             # 👑 主 Agent — KING's Coder
+│   ├── kings-coder/             #  主 Agent — KING's Coder
 │   │   ├── SOUL.md              #                                 灵魂准则
 │   │   ├── IDENTITY.md          # 身份定义
 │   │   ├── USER.md              # 用户上下文（模板）
 │   │   ├── MEMORY.md            # 持久记忆（模板）
 │   │   └── agent.json           # Otto AgentDefinition
-│   ├── ai-engineer/             # 🤖 AI系统构建工程师
+│   ├── ai-engineer/             #  AI系统构建工程师
 │   │   └── agent.json
-│   ├── ppt-master/              # 📊 PPT Creation Expert
+│   ├── ppt-master/              #  PPT Creation Expert
 │   │   └── agent.json
-│   ├── automation-rpa/          # 🤖 自动化任务录制助手
+│   ├── automation-rpa/          #  自动化任务录制助手
 │   │   └── agent.json
-│   └── computer-use/            # 🖥️ Computer Use
+│   └── computer-use/            #  Computer Use
 │       └── agent.json
 ├── workspace/
 │   ├── TOOLS.md                 # 工具配置备忘

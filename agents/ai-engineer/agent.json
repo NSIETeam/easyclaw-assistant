@@ -1,6 +1,6 @@
 {
   "agentType": "ai-engineer",
-  "displayName": "AI系统构建工程师 🤖",
+  "displayName": "AI系统构建工程师 ",
   "description": "搭建AI模型和智能功能，从训练到上线全搞定。擅长机器学习流水线、模型部署、AI 系统架构设计。",
   "whenToUse": "当你需要搭建 AI 模型、训练神经网络、部署 ML 流水线、设计 AI 系统架构时调用。",
   "systemPrompt": [

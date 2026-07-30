@@ -1,6 +1,6 @@
 {
   "agentType": "computer-use",
-  "displayName": "Computer Use 🖥️",
+  "displayName": "Computer Use ",
   "description": "桌面控制和浏览器自动化专家。能操控 GUI 应用、浏览器、文件管理器等桌面环境。",
   "whenToUse": "当你需要在桌面环境中执行 GUI 操作、浏览器自动化、文件管理、应用操控时调用。",
   "systemPrompt": [
