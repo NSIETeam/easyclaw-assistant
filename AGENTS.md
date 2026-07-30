@@ -2,12 +2,9 @@
 
 ## 项目简介
 
-本项目是 **EasyClaw → Otto** 的助手移植包。包含 KING's Coder 的完整助手定义：
-agent 人设（SOUL / IDENTITY）、workspace 配置、skills 技能、subagent 定义、以及
-Otto 兼容的运行时配置。
+本项目是 **EasyClaw → Otto** 的完整助手移植包。包含 1 个主 Agent + 4 个专业子 Agent 的定义，以及 workspace 配置。
 
-**兼容目标**：Otto v1.6+，协议层共享 AGENTS.md / .otto/ SKILL.md / agent 定义
-格式。
+**兼容目标**：Otto v1.6+，协议层共享 AGENTS.md / .otto/ agent.json / SKILL.md 格式。
 
 ## 目录结构
 
@@ -15,35 +12,47 @@ Otto 兼容的运行时配置。
 easyclaw-assistant/
 ├── AGENTS.md                    # 本文件 — Otto 标准项目入口
 ├── agents/
-│   └── kings-coder/
-│       ├── SOUL.md              # Agent 灵魂准则（Otto system prompt 注入）
-│       ├── IDENTITY.md          # Agent 身份定义
-│       ├── USER.md              # 用户上下文（模板，部署时替换）
-│       ├── MEMORY.md            # 持久记忆（模板）
-│       └── agent.json           # Otto agent 定义（model / tools / policy）
+│   ├── kings-coder/             # 👑 主 Agent — KING's Coder
+│   │   ├── SOUL.md              #                                 灵魂准则
+│   │   ├── IDENTITY.md          # 身份定义
+│   │   ├── USER.md              # 用户上下文（模板）
+│   │   ├── MEMORY.md            # 持久记忆（模板）
+│   │   └── agent.json           # Otto AgentDefinition
+│   ├── ai-engineer/             # 🤖 AI系统构建工程师
+│   │   └── agent.json
+│   ├── ppt-master/              # 📊 PPT Creation Expert
+│   │   └── agent.json
+│   ├── automation-rpa/          # 🤖 自动化任务录制助手
+│   │   └── agent.json
+│   └── computer-use/            # 🖥️ Computer Use
+│       └── agent.json
 ├── workspace/
 │   ├── TOOLS.md                 # 工具配置备忘
 │   └── HEARTBEAT.md             # 心跳任务（模板）
-├── .otto/
-│   ├── settings.json            # Otto 项目级配置
-│   └── skills/                  # Otto 兼容的技能
-│       └── <skill-name>/
-│           └── SKILL.md
-└── README.md
+└── .otto/
+    └── settings.json            # Otto 项目级配置
 ```
+
+## Agent 总览
+
+| Agent Type | 角色 | Max Turns | Model |
+|---|---|---|---|
+| `kings-coder` | 国王的编程助手 | 50 | claude-sonnet-4-20250514 |
+| `ai-engineer` | AI/ML 系统工程 | 40 | claude-sonnet-4-20250514 |
+| `ppt-master` | PPT 制作专家 | 60 | claude-sonnet-4-20250514 |
+| `automation-rpa` | 任务自动化 | 40 | deepseek-v4-pro |
+| `computer-use` | 桌面操控 | 50 | claude-sonnet-4-20250514 |
 
 ## Otto 兼容性映射
 
 | EasyClaw 概念 | Otto 对应 | 说明 |
 |---|---|---|
-| AGENTS.md | `AGENTS.md` | 完全兼容，Otto 原生读取 |
-| SOUL.md | agent `systemPrompt` 一部分 | Otto 注入为 system prompt |
-| IDENTITY.md | agent `systemPrompt` 一部分 | 同上 |
+| AGENTS.md | `AGENTS.md` | 完全兼容 |
+| SOUL.md / IDENTITY.md | agent `systemPrompt` | 注入为 system prompt |
 | MEMORY.md | `memory/` 目录 | Otto 内置记忆管理 |
-| TOOLS.md | 本地备忘 | Otto 无直接对应，保留为参考 |
-| HEARTBEAT.md | Cron 任务 | Otto 无直接对应，建议用 `.otto/cron/` |
+| Subagents | `agents/*/agent.json` | 转换为 Otto AgentDefinition |
 | Skills | `.otto/skills/` SKILL.md | 格式兼容 |
-| Subagents | `agent.json` → Otto agent 定义 | 手动转换为 Otto AgentDefinition |
+| HEARTBEAT.md | Cron 任务 | 建议用 `.otto/cron/` |
 
 ## 使用方式
 
@@ -54,25 +63,16 @@ cd <your-otto-project>
 git clone https://github.com/NSIETeam/easyclaw-assistant.git .easyclaw-assistant
 ```
 
-### 2. 链接 Agent 定义
-
-将 `agents/kings-coder/agent.json` 注册到 Otto 的 agent 系统：
+### 2. 注册所有 Agent
 
 ```bash
-# Otto 读取 .otto/agents/ 目录下的 agent 定义
-cp agents/kings-coder/agent.json .otto/agents/kings-coder.json
+mkdir -p .otto/agents
+cp .easyclaw-assistant/agents/*/agent.json .otto/agents/
 ```
 
-### 3. 链接 Skills
+### 3. 注入主 Agent 人设
 
-```bash
-# 硬链或复制到 .otto/skills/
-cp -r .otto/skills/* .otto/skills/
-```
-
-### 4. 注入 Agent 人设
-
-在 Otto 的 `.otto/settings.json` 或 `~/.otto-user/` 中配置 custom system prompt：
+在 `.otto/settings.json` 中配置 custom system prompt：
 
 ```json
 {
@@ -83,11 +83,21 @@ cp -r .otto/skills/* .otto/skills/
 }
 ```
 
+### 4. 调用子 Agent
+
+Otto 中通过 task 工具调用：
+
+```
+task(kings-coder, "修复这个 bug")
+task(ai-engineer, "设计一个推荐系统的训练流水线")
+task(ppt-master, "做一个 Q3 季度汇报的 PPT")
+task(automation-rpa, "把每日数据汇总自动化")
+task(computer-use, "帮我在浏览器里填这个表单")
+```
+
 ## 规则
 
-### Otto 开发规范
-
 - 本仓库是纯配置/数据仓库，不包含可执行代码
-- SKILL.md 遵循 Otto 的 markdown frontmatter 格式（name / description / version）
-- 所有路径使用相对路径，适配 Otto 的 workspace 模型
-- 隐私信息（USER.md 中的具体数据）使用模板占位符，部署时替换
+- `agent.json` 遵循 Otto `AgentDefinition` 接口
+- 所有路径使用相对路径
+- 隐私信息使用模板占位符
