@@ -1,0 +1,7 @@
+# Dependencies — EasyClaw Assistant Pack for Otto
+
+# 此文件仅用于 easyclaw-assistant 本身的自动化流水线（如 CI 语法检查）。
+# Agent 运行时不依赖这些——实际依赖由 Otto 核心提供。
+
+# 可选的 CI 工具
+prettier >= 3.0

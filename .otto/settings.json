@@ -1,0 +1,13 @@
+{
+  "yolo": false,
+  "autoTrimTrailingSpaces": true,
+  "agentStyle": "default",
+  "thinking": {
+    "enabled": false,
+    "stream": false
+  },
+  "feishu": {
+    "recommend": true,
+    "excludeScopes": ["im:message.send_as_user"]
+  }
+}
