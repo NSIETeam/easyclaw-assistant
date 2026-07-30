@@ -1,6 +1,14 @@
 # 👑 EasyClaw Assistant Pack for Otto
 
-KING's Coder 及 4 个专业子 Agent 的完整定义，从 EasyClaw 迁移到 Otto，100% 兼容。
+KING's Coder 及完整的 EasyClaw 专家市场，从 EasyClaw 迁移到 Otto。
+
+## 统计数据
+
+| 组件 | 数量 |
+|---|---|
+| 👑 主 Agent | 1 (kings-coder) |
+| 🤖 子 Agent | 4 |
+| 🎯 专家技能 | **57** |
 
 ## Agent 清单
 
@@ -12,24 +20,20 @@ KING's Coder 及 4 个专业子 Agent 的完整定义，从 EasyClaw 迁移到 O
 | 🤖 **automation-rpa** | 子 Agent | 任务自动化与脚本编写 |
 | 🖥️ **computer-use** | 子 Agent | 桌面控制与浏览器自动化 |
 
-## 包含内容
+## 技能分类
 
-```
-easyclaw-assistant/
-├── agents/
-│   ├── kings-coder/       # 主 Agent（SOUL + IDENTITY + 完整定义）
-│   ├── ai-engineer/       # AI 系统构建工程师
-│   ├── ppt-master/        # PPT 制作专家
-│   ├── automation-rpa/    # 自动化任务录制助手
-│   └── computer-use/      # 桌面操控专家
-├── workspace/             # 工具备忘 + 心跳模板
-├── .otto/                 # Otto 项目配置
-└── AGENTS.md              # Otto 协议入口
-```
-
-每个 agent 目录包含：
-- `agent.json` — Otto `AgentDefinition` 格式（systemPrompt / tools / maxTurns / model）
-- 人设文件（主 Agent 有 SOUL.md / IDENTITY.md / USER.md / MEMORY.md）
+| 分类 | 数量 | 技能 |
+|---|---|---|
+| 📎 办公文档 | 4 | docx, pdf, xlsx, powerpoint-editor |
+| 🔧 代码与工程 | 3 | github-operations, create-skill, full-output-enforcement |
+| 🌐 浏览器与 Web | 4 | browser-tool, web-extract, multi-search-engine, Deep Research |
+| 🎨 前端与设计 | 10 | frontend-design-fusion, design-taste-*, gpt-taste, image-to-code, industrial-brutalist-ui, minimalist-ui, etc. |
+| 🖼️ 视觉与品牌 | 3 | image-gen, brandkit, video-gen |
+| 📈 金融数据 | 1 | stock-data-pro |
+| 🔊 语音音频 | 1 | TTS-ASR |
+| 🤖 AI/ML | 1 | self-improving-agent |
+| 🔍 元技能 | 1 | find-skill |
+| 🏢 飞书办公 | **29** | lark-* (审批/文档/日历/IM/邮件/会议/OKR/表格/画板/知识库...) |
 
 ## 快速开始
 
@@ -37,25 +41,23 @@ easyclaw-assistant/
 # 1. 克隆
 git clone https://github.com/NSIETeam/easyclaw-assistant.git .easyclaw-assistant
 
-# 2. 注册所有 agent
+# 2. 注册 agent
 mkdir -p .otto/agents
 cp .easyclaw-assistant/agents/*/agent.json .otto/agents/
 
-# 3. 启动 Otto
-otto --agent kings-coder         # 主 Agent
-otto --agent ai-engineer         # AI 工程师
-otto --agent ppt-master          # PPT 专家
-otto --agent automation-rpa      # 自动化助手
-otto --agent computer-use        # 桌面控制
+# 3. 链接 skills
+ln -s .easyclaw-assistant/.otto/skills .otto/skills
+
+# 4. 启动
+otto --agent kings-coder
 ```
 
 ## Otto 兼容性
 
 - ✅ AGENTS.md 格式
 - ✅ `.otto/settings.json` 项目配置
-- ✅ `agent.json` → Otto `AgentDefinition` 格式
-- ✅ systemPrompt / tools / disallowedTools / maxTurns / model
-- ✅ SKILL.md 预留
+- ✅ `agent.json` → Otto `AgentDefinition` 
+- ✅ 57 个 `.otto/skills/*/SKILL.md` — frontmatter 兼容格式
 
 ## 许可
 
